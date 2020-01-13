@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calorie Tracker</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+<div class="nav">
+  <h1>Calorie Tracker</h1>
+  <button id="clearall">Clear All</button>
+</div>
+
+
+<div id="ci" class="container input">
+  <h2 id="bighead">Add Meal/ Food Item</h2>
+  <div class="meal">
+    <input placeholder="Add a food item or meal" id="mealinput" type="text">
+  </div>
+  
+  <button class="btn-click" id="searchmeal">Search</button>
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div class="searchoutput">
+  </div>
+</div>
+<div class="container output">
+  <div class="totals">
+    <h1>Todays Totals</h1>
+    <ul>
+      <li class="tl">Calories: <span class="caloriestotal"></span></li>
+      <li class="tl">Protein: <span class="proteintotal"></span></li>
+      <li class="tl">Fat: <span class="fattotal"></span></li>
+    </ul>
+  </div>
+
+  <div class="list">
+
+
+
+  </div>
+</div>
+
+  <script src="https://kit.fontawesome.com/93a45c1486.js" crossorigin="anonymous"></script>
+
+  <script src="ui.js"></script>
+  <script src="item.js"></script>
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
