@@ -1,12 +1,10 @@
 let caloriesTotalValue = document.querySelector(".caloriestotal").value;
 let proteinTotalValue = document.querySelector(".proteintotal").value;
 let fatTotalValue = document.querySelector(".fattotal").value;
-
-
+let initialPage = document.querySelector(".input");
 caloriesTotalValue= 0;
 proteinTotalValue=0;
 fatTotalValue=0;
-
 
 const CreateOutputList = (function(){
 
@@ -44,8 +42,8 @@ const CreateOutputList = (function(){
 
     document.querySelector(".searchoutput").innerHTML = output;
   }
-
   searchesNiceEaseIn();
+
 
 
   }
@@ -60,7 +58,17 @@ const CreateOutputList = (function(){
     let calories = e.target.parentElement.parentElement.children[1].children[1].innerText;
     let protein = e.target.parentElement.parentElement.children[2].children[1].innerText;
     let fat = e.target.parentElement.parentElement.children[3].children[1].innerText;
-    console.log(calories)
+    console.log(typeof calories)
+
+    calories =  parseFloat(calories)
+   protein =  parseFloat(protein)
+    fat = parseFloat(fat)
+
+
+    calories = Math.round(calories);
+    protein =   Math.round(protein);
+    fat =  Math.round(fat);
+
 
   
     const output = `
@@ -72,7 +80,14 @@ const CreateOutputList = (function(){
         <li><b>Protein</b>: ${protein}</li>
         <li><b>Fat</b>: ${fat}</li>
         <li class="endone"><i class="far fa-edit fa-lg edit"></i></li>
-      </ul>
+        </ul>
+        <div class="edit-buttons hide">
+        <li><button>Delete</button></li>
+        <li><button>Back</button></i></li>
+        <li><button>Edit Quantity</button></i></li>
+        </div<>
+
+
     </div>
 `
     document.querySelector(".list").innerHTML += output;
@@ -94,13 +109,81 @@ const CreateOutputList = (function(){
 
   }
 
-
-
-
-
-
-
+  const searchesNiceEaseIn = function(){
+    const searchesFound = document.querySelectorAll(".search-output-item");
+    console.log(searchesFound)
   
+    searchesFound.forEach((link, index) => {
+  
+      link.style.animation = `searchesin 0.8s ease forwards ${index/5}s`;
+      })
+  }
+
+
+  const showSpinner = function(){
+    const spinner = document.querySelector(".spinner-border");
+    spinner.classList.add("show");
+  }
+  
+  const hideSpinner =  function(){
+    const spinner = document.querySelector(".spinner-border");
+    spinner.classList.remove("show");
+  }
+  
+  const itemAdditionNiceEaseIn = function(){
+   const itemIn = document.querySelectorAll(".selected-outputitem");
+   const last = itemIn.length -1;
+   
+    itemIn[last].style.animation =`itemsin 0.8s ease forwards`;
+  }
+  
+  const showEmptySearchError = function(){
+  
+    const parElement = document.getElementById("ci");
+    const childBefore = document.querySelector("mealinput");
+  
+    let li = document.createElement("li");
+    li.classList.add("error-message");
+    let text = document.createTextNode("Please enter an item to search");
+    li.appendChild(text);
+    parElement.insertBefore(li, childBefore);
+    console.log(li)
+    let errorMessage = document.querySelector(".error-message");
+  
+    errorMessage.classList.add("errorfadein");
+    setTimeout(function(){
+      errorMessage.classList.add("errorfadeout");
+      setTimeout(function(){
+        li.remove();
+      },100);
+  
+    },2000);
+  
+  }
+  
+  const showNoResultsError = function(){
+    const parElement = document.getElementById("ci");
+    const childBefore = document.querySelector("#mealinput");
+  
+  
+    let li = document.createElement("li");
+    li.classList.add("error-message");
+    let text = document.createTextNode("No results match your entry");
+    li.appendChild(text);
+    parElement.appendChild(li)
+    console.log(li)
+    let errorMessage = document.querySelector(".error-message");
+  
+    errorMessage.classList.add("errorfadein");
+    setTimeout(function(){
+      errorMessage.classList.add("errorfadeout");
+      setTimeout(function(){
+        li.remove();
+      },100);
+    },2000);
+  
+  }
+
   return {
     callCreateListofChosenFood: function(e){
       createListofChosenFood(e);
@@ -110,92 +193,46 @@ const CreateOutputList = (function(){
     },
     callCreateListOfSearchOptions: function(data){
       createListOfSearchOptions(data);
-    }
+    },
 
+    callsearchesNiceEaseIn: function(){
+      searchesNiceEaseIn();
+    },
+
+    callshowSpinner: function(){
+      showSpinner();
+    },
+
+    callhideSpinner: function(){
+      hideSpinner();
+    },
     
+    callitemAdditionNiceEaseIn: function(){
+      itemAdditionNiceEaseIn();
+    },
+
+    callshowEmptySearchError: function(){
+      showEmptySearchError();
+    },
+
+    callshowNoResultsError: function(){
+      showNoResultsError();
+    }
   }
 })();
 
 
 
-function searchesNiceEaseIn(){
-  const searchesFound = document.querySelectorAll(".search-output-item");
-  console.log(searchesFound)
-
-  searchesFound.forEach((link, index) => {
-
-    link.style.animation = `searchesin 0.8s ease forwards ${index/5}s`;
-    })
-}
-
-
-function showSpinner(){
-  const spinner = document.querySelector(".spinner-border");
-  spinner.classList.add("show");
-}
-
-function hideSpinner(){
-  const spinner = document.querySelector(".spinner-border");
-  spinner.classList.remove("show");
-}
-
-function itemAdditionNiceEaseIn(){
- const itemIn = document.querySelectorAll(".selected-outputitem");
- const last = itemIn.length -1;
- 
-  itemIn[last].style.animation =`itemsin 0.8s ease forwards`;
-}
-
-function showEmptySearchError(){
-
-  const parElement = document.getElementById("ci");
-  const childBefore = document.querySelector("mealinput");
 
 
 
 
-  let li = document.createElement("li");
-  li.classList.add("error-message");
-  let text = document.createTextNode("Please enter an item to search");
-  li.appendChild(text);
-  parElement.insertBefore(li, childBefore);
-  console.log(li)
-  let errorMessage = document.querySelector(".error-message");
-
-  errorMessage.classList.add("errorfadein");
-  setTimeout(function(){
-    errorMessage.classList.add("errorfadeout");
-    setTimeout(function(){
-      li.remove();
-    },100);
-
-  },2000);
-
-}
-
-function showNoResultsError(){
-  const parElement = document.getElementById("ci");
-  const childBefore = document.querySelector("#mealinput");
 
 
-  let li = document.createElement("li");
-  li.classList.add("error-message");
-  let text = document.createTextNode("No results match your entry");
-  li.appendChild(text);
-  parElement.appendChild(li)
-  console.log(li)
-  let errorMessage = document.querySelector(".error-message");
 
-  errorMessage.classList.add("errorfadein");
-  setTimeout(function(){
-    errorMessage.classList.add("errorfadeout");
-    setTimeout(function(){
-      li.remove();
-    },100);
 
-  },2000);
 
-}
+
 
 
 

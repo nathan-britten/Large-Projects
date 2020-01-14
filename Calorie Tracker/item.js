@@ -21,12 +21,12 @@ const GetFoodData = (function() {
       const theData = data;
 
       if(data.hints.length === 0){
-        hideSpinner();
-        showNoResultsError()
+        CreateOutputList.callhideSpinner();
+        CreateOutputList.callshowNoResultsError()
       } else {
 
         CreateOutputList.callCreateListOfSearchOptions(theData);
-        hideSpinner();
+        CreateOutputList.callhideSpinner();
       }
 
 
