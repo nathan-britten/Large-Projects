@@ -5,6 +5,7 @@ let initialPage = document.querySelector(".input");
 caloriesTotalValue= 0;
 proteinTotalValue=0;
 fatTotalValue=0;
+let idCounter = 0;
 
 const CreateOutputList = (function(){
 
@@ -58,7 +59,6 @@ const CreateOutputList = (function(){
     let calories = e.target.parentElement.parentElement.children[1].children[1].innerText;
     let protein = e.target.parentElement.parentElement.children[2].children[1].innerText;
     let fat = e.target.parentElement.parentElement.children[3].children[1].innerText;
-    console.log(typeof calories)
 
     calories =  parseFloat(calories)
    protein =  parseFloat(protein)
@@ -76,20 +76,27 @@ const CreateOutputList = (function(){
     <div class="selected-outputitem">
       <ul>
         <li id="firstone">${name}</li>
-        <li><b>Calories</b>: ${calories}</li>
-        <li><b>Protein</b>: ${protein}</li>
-        <li><b>Fat</b>: ${fat}</li>
+        <li><b>Calories</b>:<span id="calNum">${calories}</span></li>
+        <li><b>Protein</b>:<span id="proNum">${protein}</span></li>
+        <li><b>Fat</b>:<span id="fatNum">${fat}</span></li>
         <li class="endone"><i class="far fa-edit fa-lg edit"></i></li>
-        </ul>
         <div class="edit-buttons hide">
-        <li><button>Delete</button></li>
-        <li><button>Back</button></i></li>
-        <li><button>Edit Quantity</button></i></li>
-        </div<>
+          <li><button class="deleteItem">Delete</button></li>
+        </div>
+        <div class="quantity-edit hide">
+          <label>Quantity in Grams</label>
+          <input type="number" id="changeQuantVal" value="100" class="changequantityvalue" placeholder="">
+          <i class="far fa-check-circle"></i>
+        </div>
+
+        </ul>
+ 
 
 
     </div>
 `
+// {/* <li><button class="edittheQuant">Edit Quantity</button></i></li> */} quantity button from above
+
     document.querySelector(".list").innerHTML += output;
     itemAdditionNiceEaseIn() ;
 
@@ -107,11 +114,31 @@ const CreateOutputList = (function(){
     document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
     document.querySelector(".fattotal").innerHTML = fatTotalValue;
 
+    let id;
+    parseInt(id)
+    id = 0;
+    console.log(typeof id)
+
+    const item = {
+
+      name: `${name}`, 
+      calories: `${calories}`,
+      protein: `${protein}`,
+      fat: `${fat}`,
+      id: `${id}`
+      
+    }
+    console.log(item)
+
+
+    Storage.callAddItems(item);
+
   }
+
+
 
   const searchesNiceEaseIn = function(){
     const searchesFound = document.querySelectorAll(".search-output-item");
-    console.log(searchesFound)
   
     searchesFound.forEach((link, index) => {
   
@@ -217,6 +244,10 @@ const CreateOutputList = (function(){
 
     callshowNoResultsError: function(){
       showNoResultsError();
+    },
+
+    callRandomID: function(){
+      randomID();
     }
   }
 })();

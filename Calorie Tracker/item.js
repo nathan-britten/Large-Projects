@@ -11,6 +11,7 @@ const GetFoodData = (function() {
 
   const access = function(){
     fetch(`https://api.edamam.com/api/food-database/parser?ingr=${mealText}&app_id=${appID}&app_key=${appKey}`)
+
     .then(function(results){
     return results.json();    
     })
