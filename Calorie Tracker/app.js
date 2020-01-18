@@ -1,6 +1,5 @@
 const searchButton = document.querySelector("#searchmeal");
 
-Storage.callCreateDisplay();
 
 let initialWeight;
 const standardWeight = 100;
@@ -12,8 +11,7 @@ document.querySelector("#meal").addEventListener("keyup", function(e){
   GetFoodData.callAccess();
 })
 */
-
-GetFoodData.callAccess();
+Storage.callCreateDisplay();
 
 searchButton.addEventListener("click", function(){
 
@@ -99,54 +97,3 @@ function deleteItem(e){
     item.remove();
 
 }
-
-
-/*
-function updateCalories(e){
-
-  let calorieInitialValue = e.target.parentElement.childNodes[3].value;
-  console.log(calorieInitialValue)
-
-    const currentCals = e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[3].childNodes[2].innerText;
-
-    const currentProtein = e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].childNodes[2].innerText;
-
-    const currentFat = e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[7].childNodes[2].innerText;
-
-    console.log(currentCals,  currentProtein, currentFat);
-
-    // if box value is not equal to 100 then divide by the new box value 
-
-    let newCals = Math.round((currentCals / standardWeight) * calorieInitialValue * 10)/10;
-    let newPro = Math.round((currentProtein / standardWeight) * calorieInitialValue * 10)/10;
-    let newFat = Math.round((currentFat / standardWeight) * calorieInitialValue * 10)/10;
-
-  
-    e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[3].childNodes[2].innerText = newCals;
-
-    e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[5].childNodes[2].innerText = newPro;
-
-    e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[7].childNodes[2].innerText = newFat;
-
-console.log(newCals, newPro, newFat)
-
-
-
-
-document.querySelector(".caloriestotal").innerHTML = caloriesTotalValue;
-    document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
-    document.querySelector(".fattotal").innerHTML = fatTotalValue;
-
-  
-
-
-}
-*/
-
-  // const editButtonsNumber = document.querySelectorAll(".edit-buttons");
-
-  // console.log(editIconNumber)
-  // console.log(editButtonsNumber)
-
-
-
