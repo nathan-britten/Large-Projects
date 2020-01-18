@@ -91,12 +91,14 @@ function deleteItem(e){
   document.querySelector(".caloriestotal").innerHTML = caloriesTotalValue;
     document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
     document.querySelector(".fattotal").innerHTML = fatTotalValue;
+
+   let nazza = e.target.parentElement.parentElement.parentElement.childNodes[1].childNodes[0].textContent;
+   console.log(nazza)
     
-    Storage.callRemoveItem();
+    Storage.callRemoveItem(nazza);
     item.remove();
 
 }
-
 
 
 /*

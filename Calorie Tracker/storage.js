@@ -11,17 +11,39 @@ const Storage = (function(){
           items = JSON.parse(localStorage.getItem("items"))
         }
 
+        for(let i = 0; i < items.length; i++){
+          if(items.length > 0){
+            items[i].id = items[items.length - 1].id + 1;
+          } else {
+            items[i].id
+          }
+        }
+  
+
+        // items.forEach(function(el){
+
+        //   if(items.length > 0){
+        //     console.log(el.length)
+        //     console.log(el.id)
+        //     el.id = items[items.length -1].id + 1;
+        //   } else{
+
+        //     el.id = 0;
+        //   }
+  
+       
+        // })
+
+
         return items;
+
+
+
       }
 
   const addItems = function(item){
 
       const allItems = getItems();
-
-      allItems.forEach(function(el){
-        parseInt(el.id)
-        el.id++
-      })
 
 
       // id = document.querySelectorAll(".selected-outputitem").length -1
@@ -93,40 +115,37 @@ const Storage = (function(){
       }
   }
 
-  const removeItem = function(){
+  const removeItem = function(nazza){
 
+    console.log(nazza)
+    
     const items = getItems();
-    console.log(items)
-  //   console.log(items)
 
-  //  for(let i=0; i< items.length; i++){
+    let indexPosition;
+    for(let i = 0; i < items.length; i++){
+        if(items[i].name === nazza){
+          indexPosition = i;
+        }
+    }
+    console.log()
 
-  //   if(items[i] === i){
-  //     items.splice(i, 1)
-  //   }
-  // }
-
-  //   console.log(items)
-
-    const compare = document.querySelectorAll(".selected-outputitem").id;
-
-
-    // get index of the selected-output item
+    items.splice(indexPosition, 1);
 
 
 
-
-    //get the index of items and if they are the smae ,remove.
-
+    // const compare = document.querySelectorAll(".selected-outputitem").innerHTML;
     // console.log(compare)
 
-    items.forEach(function(item, index){
 
-      items.splice(index, 1);
 
-    })
 
-    console.log(items)
+    // items.forEach(function(item, index){
+
+    //   items.splice(index, 1);
+
+    // })
+
+    // console.log(items)
 
     
     localStorage.setItem("items", JSON.stringify(items))
@@ -150,8 +169,8 @@ const Storage = (function(){
       createDisplay();
     },
 
-    callRemoveItem: function(){
-      removeItem();
+    callRemoveItem: function(nazza){
+      removeItem(nazza);
     }
 
   }

@@ -16,8 +16,6 @@ const GetFoodData = (function() {
     return results.json();    
     })
     .then(function(data){
-      console.log(data.parsed.length)
-      console.log(data.hints.length)
       
       const theData = data;
 
