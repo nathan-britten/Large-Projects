@@ -16,10 +16,12 @@ const GetFoodData = (function() {
     return results.json();    
     })
     .then(function(data){
+      console.log(data)
       
       const theData = data;
 
       if(data.hints.length === 0){
+        
         CreateOutputList.callhideSpinner();
         CreateOutputList.callshowNoResultsError()
       } else {

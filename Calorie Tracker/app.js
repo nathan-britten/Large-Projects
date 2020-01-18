@@ -2,7 +2,6 @@ const searchButton = document.querySelector("#searchmeal");
 
 
 let initialWeight;
-const standardWeight = 100;
 /*
 ///Initialy wanted to search as I typed but API limits make this not practical
 document.querySelector("#meal").addEventListener("keyup", function(e){
@@ -40,10 +39,12 @@ CreateOutputList.callCreateListofChosenFood(e);
 
   if(e.target.classList.contains("edittheQuant")){
     showQuantityInput(e);
+    CreateOutputList.getCurrentQuanityWeight(e);
+    
   }
 
   if(e.target.classList.contains("fa-check-circle")){
-    updateCalories(e);
+    CreateOutputList.updateCalories(e);
   }
 
   if(e.target.classList.contains("deleteItem")){
@@ -69,6 +70,8 @@ function showQuantityInput(e){
   let itemClassList = e.target.parentElement.parentElement.parentElement.childNodes[13].classList;
 
   itemClassList.toggle("hide");
+
+ 
 }
 
 function deleteItem(e){

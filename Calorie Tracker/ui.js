@@ -10,7 +10,7 @@ let idCounter = 0;
 const CreateOutputList = (function(){
 
   const createListOfSearchOptions = function(data){
-
+    console.log(data)
     let output = "";
 
 
@@ -19,11 +19,10 @@ const CreateOutputList = (function(){
   for(let i = 0; i < 5; i++){
 
   
-      const name = data.hints[i].food.label
-      name;
-      const calories = Math.round(data.hints[i].food.nutrients.ENERC_KCAL * 10) /10;
-      const protein = Math.round(data.hints[i].food.nutrients.PROCNT * 10)/10;
-      const fat = Math.round(data.hints[i].food.nutrients.FAT * 10)/10;
+      const name = data.hints[i].food.label;
+      const calories = Math.round(data.hints[i].food.nutrients.ENERC_KCAL);
+      const protein = Math.round(data.hints[i].food.nutrients.PROCNT);
+      const fat = Math.round(data.hints[i].food.nutrients.FAT);
 
       if(name && calories && protein && fat){
 
@@ -60,9 +59,14 @@ const CreateOutputList = (function(){
     let protein = e.target.parentElement.parentElement.children[2].children[1].innerText;
     let fat = e.target.parentElement.parentElement.children[3].children[1].innerText;
 
-    calories =  parseFloat(calories)
-   protein =  parseFloat(protein)
-    fat = parseFloat(fat)
+    const initalCalories = e.target.parentElement.parentElement.children[1].children[1].innerText;
+    const initalProein = e.target.parentElement.parentElement.children[2].children[1].innerText;
+    const initalFat = e.target.parentElement.parentElement.children[3].children[1].innerText;
+    let inputNumVal = "100";
+
+    calories =  parseInt(calories)
+   protein =  parseInt(protein)
+    fat = parseInt(fat)
 
 
     calories = Math.round(calories);
@@ -82,28 +86,25 @@ const CreateOutputList = (function(){
         <li class="endone"><i class="far fa-edit fa-lg edit"></i></li>
         <div class="edit-buttons hide">
           <li><button class="deleteItem">Delete</button></li>
+          <li><button class="edittheQuant">Edit Quantity</button></i></li>
         </div>
         <div class="quantity-edit hide">
           <label>Quantity in Grams</label>
-          <input type="number" id="changeQuantVal" value="100" class="changequantityvalue" placeholder="">
+          <input type="number" id="changeQuantVal" value="${inputNumVal}" class="changequantityvalue" placeholder="">
           <i class="far fa-check-circle"></i>
         </div>
-
         </ul>
- 
-
-
     </div>
 `
-// {/* <li><button class="edittheQuant">Edit Quantity</button></i></li> */} quantity button from above
+ 
 
     document.querySelector(".list").innerHTML += output;
     itemAdditionNiceEaseIn() ;
 
 
-    calories = parseFloat(calories)
-    protein = parseFloat(protein)
-    fat = parseFloat(fat)
+    calories = parseInt(calories)
+    protein = parseInt(protein)
+    fat = parseInt(fat)
 
 
     caloriesTotalValue += calories;
@@ -114,23 +115,28 @@ const CreateOutputList = (function(){
     document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
     document.querySelector(".fattotal").innerHTML = fatTotalValue;
 
-    let id;
-    parseInt(id)
-    id = 0;
-    console.log(typeof id)
+
+
+
+
+    const intialValuesItem = {
+
+      name: `${name}`, 
+      calories: `${initalCalories}`,
+      protein: `${initalProein}`,
+      fat: `${initalFat}`
+    
+    }
 
     const item = {
-
       name: `${name}`, 
       calories: `${calories}`,
       protein: `${protein}`,
-      fat: `${fat}`,
-      id: `${id}`
-      
+      fat: `${fat}`
     }
     console.log(item)
 
-
+    console.log(intialValuesItem)
     Storage.callAddItems(item);
 
   }
@@ -248,7 +254,92 @@ const CreateOutputList = (function(){
 
     callRandomID: function(){
       randomID();
+    },
+
+    updateCalories: function(e){
+
+      const newWeight = e.target.parentElement.parentElement.childNodes[13].childNodes[3].value;
+
+      let name = e.target.parentElement.parentElement.childNodes[1].innerText
+      let calories = e.target.parentElement.parentElement.childNodes[3].childNodes[2].innerText;
+      let protein = e.target.parentElement.parentElement.childNodes[5].childNodes[2].innerText;
+      let fat = e.target.parentElement.parentElement.childNodes[7].childNodes[2].innerText;
+
+
+
+
+      calories =  parseInt(calories)
+      protein =  parseInt(protein)
+       fat = parseInt(fat)
+      
+   
+       calories = Math.round(calories);
+       protein =   Math.round(protein);
+       fat =  Math.round(fat);
+      
+
+
+      caloriesTotalValue -= calories;
+      proteinTotalValue -= protein;
+      fatTotalValue -= fat;
+  
+
+      document.querySelector(".caloriestotal").innerHTML = caloriesTotalValue;
+      document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
+      document.querySelector(".fattotal").innerHTML = fatTotalValue;
+
+      calories = calories / initialWeight;
+      protein = protein / initialWeight;
+      fat = fat / initialWeight;
+
+
+
+      calories *= newWeight;
+      protein *= newWeight;
+      fat *= newWeight;
+
+
+
+      caloriesTotalValue += calories;
+      proteinTotalValue += protein;
+      fatTotalValue += fat;
+
+    e.target.parentElement.parentElement.childNodes[3].childNodes[2].innerText = calories;
+    e.target.parentElement.parentElement.childNodes[5].childNodes[2].innerText = protein;
+     e.target.parentElement.parentElement.childNodes[7].childNodes[2].innerText = fat;
+        
+      document.querySelector(".caloriestotal").innerHTML = caloriesTotalValue;
+      document.querySelector(".proteintotal").innerHTML = proteinTotalValue;
+      document.querySelector(".fattotal").innerHTML = fatTotalValue;
+
+      const item = {
+        name: `${name}`, 
+        calories: `${calories}`,
+        protein: `${protein}`,
+        fat: `${fat}`,
+        newWeight: `${newWeight}`
+      }
+
+      Storage.callAddItems(item);
+
+      Storage.callRemoveItem(item);
+
+      // itemClassList.toggle("hide");
+
+    
+
+
+      
+
+    },
+    getCurrentQuanityWeight: function(e){
+
+      
+      initialWeight = e.target.parentElement.parentElement.parentElement.childNodes[13].childNodes[3].value
+      console.log("initWeight; " + initialWeight)
+      
     }
+
   }
 })();
 

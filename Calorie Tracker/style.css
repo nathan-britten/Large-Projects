@@ -335,8 +335,7 @@ margin-right:100px;
  }
 
 
-.edit-buttons{
-}
+
  
 
 
@@ -359,11 +358,6 @@ padding-left: 50px;
     width:60%;
   }
 
-  
-
-
-    
- 
 
   .input{
     padding:25px 100px 25px 100px;
@@ -388,6 +382,31 @@ padding-left: 50px;
     margin:0;
   }
 
+}
 
+@media only screen and (max-width:900px){
+
+  .totals{
+    width:100%;
+  }
+
+  .output, .input {
+    padding:5px;
+
+    width:95%;
+  }
+
+
+  .selected-outputitem ul{
+
+    padding:5px;
+
+  }
+
+  .meal #mealinput{
+    width: 70vw;
+
+   }
+  
 
 }

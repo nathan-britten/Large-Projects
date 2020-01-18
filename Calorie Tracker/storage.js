@@ -1,3 +1,6 @@
+const standardWeight = 100;
+
+
 const Storage = (function(){
 
   let items;
@@ -72,6 +75,11 @@ const Storage = (function(){
       let calories = el.calories;
       let protein = el.protein;
       let fat = el.fat;
+      let newWeight = el.newWeight;
+
+      if(newWeight === ""){
+        newWeight = 100;
+      }
 
       const output = `
   
@@ -84,13 +92,13 @@ const Storage = (function(){
           <li class="endone"><i class="far fa-edit fa-lg edit"></i></li>
           <div class="edit-buttons hide">
             <li><button class="deleteItem">Delete</button></li>
+            <li><button class="edittheQuant">Edit Quantity</button></i></li>
           </div>
           <div class="quantity-edit hide">
             <label>Quantity in Grams</label>
-            <input type="number" id="changeQuantVal" value="100" class="changequantityvalue" placeholder="">
+            <input type="number" id="changeQuantVal" value="${newWeight}" class="changequantityvalue" placeholder="">
             <i class="far fa-check-circle"></i>
           </div>
-  
           </ul>
       </div>
   `
