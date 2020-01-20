@@ -13,6 +13,12 @@ const CreateOutputList = (function(){
     console.log(data)
     let output = "";
 
+    // if(data.parsed > 0){
+    //         const name = data.hints[i].food.label;
+    //   const calories = Math.round(data.hints[i].food.nutrients.ENERC_KCAL);
+    //   const protein = Math.round(data.hints[i].food.nutrients.PROCNT);
+    //   const fat = Math.round(data.hints[i].food.nutrients.FAT);
+    // }
 
 
 
@@ -43,9 +49,6 @@ const CreateOutputList = (function(){
     document.querySelector(".searchoutput").innerHTML = output;
   }
   searchesNiceEaseIn();
-
-
-
   }
 
 
@@ -132,7 +135,8 @@ const CreateOutputList = (function(){
       name: `${name}`, 
       calories: `${calories}`,
       protein: `${protein}`,
-      fat: `${fat}`
+      fat: `${fat}`,
+      value: `${inputNumVal}`
     }
     console.log(item)
 
@@ -299,10 +303,15 @@ const CreateOutputList = (function(){
       fat *= newWeight;
 
 
+      calories = Math.round(calories);
+      protein =   Math.round(protein);
+      fat =  Math.round(fat);
 
       caloriesTotalValue += calories;
       proteinTotalValue += protein;
       fatTotalValue += fat;
+
+      
 
     e.target.parentElement.parentElement.childNodes[3].childNodes[2].innerText = calories;
     e.target.parentElement.parentElement.childNodes[5].childNodes[2].innerText = protein;
@@ -317,15 +326,16 @@ const CreateOutputList = (function(){
         calories: `${calories}`,
         protein: `${protein}`,
         fat: `${fat}`,
-        newWeight: `${newWeight}`
+        value: `${newWeight}`
       }
 
       Storage.callAddItems(item);
 
       Storage.callRemoveItem(item);
 
-      // itemClassList.toggle("hide");
+      // itemClassList.
 
+      e.target.parentElement.classList.toggle("hide");
     
 
 

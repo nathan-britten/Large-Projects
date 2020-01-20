@@ -75,11 +75,8 @@ const Storage = (function(){
       let calories = el.calories;
       let protein = el.protein;
       let fat = el.fat;
-      let newWeight = el.newWeight;
+      let value = el.value;
 
-      if(newWeight === ""){
-        newWeight = 100;
-      }
 
       const output = `
   
@@ -96,7 +93,7 @@ const Storage = (function(){
           </div>
           <div class="quantity-edit hide">
             <label>Quantity in Grams</label>
-            <input type="number" id="changeQuantVal" value="${newWeight}" class="changequantityvalue" placeholder="">
+            <input type="number" id="changeQuantVal" value="${value}" class="changequantityvalue" placeholder="">
             <i class="far fa-check-circle"></i>
           </div>
           </ul>
